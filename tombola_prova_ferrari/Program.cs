@@ -56,7 +56,7 @@ namespace tombola_prova_ferrari
                     nume = ran.Next(1, 91);//estrazione di un numero casuale tra 1 e 90
                 } while (v[nume - 1] == true);//verifica che il numero non sia ancora uscito
                 v[nume - 1] = true;//segna il numero estratto come estratto tramite un array do bool (true == estratto)
-                return nume;//ritorna il valore di numer, ovvero il numero estratto
+                return nume;//ritorna il valore di numero, ovvero il numero estratto
             }
             int coordx()//funzione che restituisce le coordinate x dove scrivere il numero estratto sul tabellone
             {
@@ -75,251 +75,251 @@ namespace tombola_prova_ferrari
                         x = 2 + num / (num / 10) * 3 - 1;//calcolo della x se la condizione non è verificata
                     }
                 }
-                return x;
+                return x;//ritorna il valore di x
             }
-            int coordy()
+            int coordy()//funzione che restituisce le coordinate y dove scrivere il numero estratto sul tabellone
             {
-                if (num / 10 == 0)
+                if (num / 10 == 0)//condizione che verifica se il numero ha 0 come decina
                 {
-                    y = 2;
+                    y = 2;//calcolo della y se la condizione è verificata
                 }
-                else
+                else//istruzioni da eseguire se la condizione non è verificata
                 {
-                    if (num % 10 != 0)
+                    if (num % 10 != 0)//condizione che verifica se il numero non ha 0 come unità
                     {
-                        y = 2 + num / 10;
+                        y = 2 + num / 10;//calcolo della y se la condizione è verificata
                     }
-                    else
+                    else//istruzioni da eseguire se la condizione non è verificata
                     {
-                        y = 1 + num / 10;
+                        y = 1 + num / 10;//calcolo della y se la condizione non è verificata
                     }
                 }
-                return y;
+                return y;//ritorna il valore di y
             }
-            int ccart1()
+            int ccart1()//funzione di caricamento della matrice della prima cartella
             {
-                bool[] cartv = new bool[90];
-                int numr;
-                for (int k = 0; k < 3; k++)
+                bool[] cartv = new bool[90];//dichiarazione di un array di 90 elementi per verificare l'univocità dei numeri sulla cartella
+                int numr;//dichiarazione della variabile intera locale numr
+                for (int k = 0; k < 3; k++)//ciclo che identifica le righe della cartella
                 {
-                    bool[] decv = new bool[10];
-                    for (int j = 0; j < 5; j++)
+                    bool[] decv = new bool[10];//dichiarazione di un array di 10 elementi per verificare l'univocità della decina dei numeri sulla riga
+                    for (int j = 0; j < 5; j++)//ciclo che identifica i numeri da generare per ogni riga
                     {
-                        do
+                        do//ciclo do while che estrae il numero finchè non rispetta la condizione di univocità della cartella e della decina nella riga
                         {
-                            numr = ran.Next(1, 91);
-                            if (numr == 90)
+                            numr = ran.Next(1, 91);//estrazione di un numero casuale tra 1 e 90
+                            if (numr == 90)//verifica che il numero casuale sia 90, in quel caso va applicata una modifica al procedimento
                             {
-                                j--;
+                                j--;//diminuire il contatore in caso di 90, poichè appartenendo ala colonna 8 potrebbe sovrascrivere un numero 8?, avendo come decina 9
                             }
-                        } while (cartv[numr - 1] == true || decv[numr / 10] == true);
-                        cartv[numr - 1] = true;
-                        decv[numr / 10] = true;
-                        if (numr == 90)
+                        } while (cartv[numr - 1] == true || decv[numr / 10] == true);//verifica che il numero sia univoco nella cartella e che la decina sia univoca nella riga
+                        cartv[numr - 1] = true;//segna il numero generato come già presente tramite un array do bool (true == presente)
+                        decv[numr / 10] = true;//segna la decina del numero come già presente all'interno della riga tramite un array do bool (true == presente)
+                        if (numr == 90)//condizione che sposta il 90 nella colona con decina 8
                         {
-                            cart1[8, k] = 90;
+                            cart1[8, k] = 90;//assegnazione del valore 90 in caso di condizione verificata
                         }
-                        else
+                        else//istruzioni da eseguire se la condizione non è verificata
                         {
-                            cart1[numr / 10, k] = numr;
+                            cart1[numr / 10, k] = numr;//assegnazione del valore di numr in caso di condizione non verificata
                         }
                     }
-                    for (int i = 0; i < 9; i++)
+                    for (int i = 0; i < 9; i++)//ciclo che imposta a false di tutti gli elementi dell'array decv
                     {
-                        decv[i] = false;
+                        decv[i] = false;//assegnazione di false a decv con in dice il contatore i
                     }
                 }
-                return 0;
+                return 0;//ritona 0;
             }
-            int ccart2()
+            int ccart2()//funzione di caricamento della matrice della seconda cartella
             {
 
-                bool[] cartv = new bool[90];
-                int numr;
-                for (int k = 0; k < 3; k++)
+                bool[] cartv = new bool[90];//dichiarazione di un array di 90 elementi per verificare l'univocità dei numeri sulla cartella
+                int numr;//dichiarazione della variabile intera locale numr
+                for (int k = 0; k < 3; k++)//ciclo che identifica le righe della cartella
                 {
-                    bool[] decv = new bool[10];
-                    for (int j = 0; j < 5; j++)
+                    bool[] decv = new bool[10];//dichiarazione di un array di 10 elementi per verificare l'univocità della decina dei numeri sulla riga
+                    for (int j = 0; j < 5; j++)//ciclo che identifica i numeri da generare per ogni riga
                     {
-                        do
+                        do//ciclo do while che estrae il numero finchè non rispetta la condizione di univocità della cartella e della decina nella riga
                         {
-                            numr = ran.Next(1, 91);
-                            if (numr == 90)
+                            numr = ran.Next(1, 91);//estrazione di un numero casuale tra 1 e 90
+                            if (numr == 90)//verifica che il numero casuale sia 90, in quel caso va applicata una modifica al procedimento
                             {
-                                j--;
+                                j--;//diminuire il contatore in caso di 90, poichè appartenendo ala colonna 8 potrebbe sovrascrivere un numero 8?, avendo come decina 9
                             }
-                        } while (cartv[numr - 1] == true || decv[numr / 10] == true);
-                        cartv[numr - 1] = true;
-                        decv[numr / 10] = true;
-                        if (numr == 90)
+                        } while (cartv[numr - 1] == true || decv[numr / 10] == true);//verifica che il numero sia univoco nella cartella e che la decina sia univoca nella riga
+                        cartv[numr - 1] = true;//segna il numero generato come già presente tramite un array do bool (true == presente)
+                        decv[numr / 10] = true;//segna la decina del numero come già presente all'interno della riga tramite un array do bool (true == presente)
+                        if (numr == 90)//condizione che sposta il 90 nella colona con decina 8
                         {
-                            cart2[8, k] = 90;
+                            cart2[8, k] = 90;//assegnazione del valore 90 in caso di condizione verificata
                         }
-                        else
+                        else//istruzioni da eseguire se la condizione non è verificata
                         {
-                            cart2[numr / 10, k] = numr;
+                            cart2[numr / 10, k] = numr;//assegnazione del valore di numr in caso di condizione non verificata
                         }
                     }
-                    for (int i = 0; i < 9; i++)
+                    for (int i = 0; i < 9; i++)//ciclo che imposta a false di tutti gli elementi dell'array decv
                     {
-                        decv[i] = false;
+                        decv[i] = false;//assegnazione di false a decv con in dice il contatore i
                     }
                 }
-                return 0;
+                return 0;//ritona 0;
             }
-            void pcart1()
+            void pcart1()//funzione di stampa della prima cartella
             {
-                x = 0;
-                y = 12;
-                Console.SetCursorPosition(x, y);
-                Console.WriteLine("Cartella 1: ");
-                y++;
-                for (int i = 0; i < 5; i++)
+                x = 0;//assegnazione del valore 0 a x
+                y = 12;//assegnazione del valore 12 a y
+                Console.SetCursorPosition(x, y);//impostare la posizione a x e y
+                Console.WriteLine("Cartella 1: ");//stampa dei "Cartella 1: "
+                y++;//incremento di y 
+                for (int i = 0; i < 5; i++)//ciclo che stampa le righe della cartella, comprese quelle di divisione
                 {
-                    x = 0;
-                    y++;
-                    if (i % 2 == 1)
+                    x = 0;//assegnazione del valore 0 a x
+                    y++;//incremento di y
+                    if (i % 2 == 1)//condizione che verifica se la riga è da trattini (o da numeri)
                     {
-                        Console.SetCursorPosition(x, y);
-                        Console.WriteLine("-------------------------");
+                        Console.SetCursorPosition(x, y);//impostare la posizione a x e y
+                        Console.WriteLine("-------------------------");//output della riga di trattini
                     }
-                    else
+                    else//istruzioni da eseguire se la condizione non è verificata (riga composta da numeri)
                     {
-                        Console.SetCursorPosition(x, y);
-                        for (int j = 0; j < 9; j++)
+                        Console.SetCursorPosition(x, y);//impostare la posizione a x e y
+                        for (int j = 0; j < 9; j++)//ciclo per scrivere i numeri o gli eventuali spazi all'interno della riga
                         {
-                            if (cart1[j, i / 2 + i % 2] != 0)
+                            if (cart1[j, i / 2 + i % 2] != 0)//condizione che verifica se è necessario stampare un numero o lo spazio
                             {
-                                Console.Write($"{cart1[j, i / 2 + i % 2]} ");
+                                Console.Write($"{cart1[j, i / 2 + i % 2]} ");//stampa del numero (condizione verificata) seguito da uno spazio per distanziarlo dai seguenti numeri/spazi
                             }
-                            else
+                            else//istruzioni da eseguire se la condizione non è verificata (stampa degli spazi)
                             {
-                                if (j == 0)
+                                if (j == 0)//condizione che verifica se il numero da stampare occupa 1 spazop (decina == 0)
                                 {
-                                    Console.Write("  ");
+                                    Console.Write("  ");//stampa di uno spazio seguito dallo spazio per distanziarlo dai seguenti numeri/spazi
                                 }
-                                else
+                                else//istruzioni da eseguire se la condizione non è verificata (decina != 0)
                                 {
-                                    Console.Write("   ");
-                                }
-                            }
-                        }
-                        Console.WriteLine();
-                    }
-                }
-            }
-            void pcart2()
-            {
-                x = 30;
-                y = 12;
-                Console.SetCursorPosition(x, y);
-                Console.WriteLine("Cartella 2: ");
-                y++;
-                for (int i = 0; i < 5; i++)
-                {
-                    x = 30;
-                    y++;
-                    if (i % 2 == 1)
-                    {
-                        Console.SetCursorPosition(x, y);
-                        Console.WriteLine("-------------------------");
-                    }
-                    else
-                    {
-                        Console.SetCursorPosition(x, y);
-                        for (int j = 0; j < 9; j++)
-                        {
-                            if (cart2[j, i / 2 + i % 2] != 0)
-                            {
-                                Console.Write($"{cart2[j, i / 2 + i % 2]} ");
-                            }
-                            else
-                            {
-                                if (j == 0)
-                                {
-                                    Console.Write("  ");
-                                }
-                                else
-                                {
-                                    Console.Write("   ");
+                                    Console.Write("   ");//stampa di due spazi seguiti dallo spazio per distanziarli dai seguenti numeri/spazi
                                 }
                             }
                         }
-                        Console.WriteLine();
+                        Console.WriteLine();//a capo
                     }
                 }
             }
-            int hcart1()
+            void pcart2()//funzione di stampa della seconda cartella
             {
-                x = 0;
-                y = 14;
-                for (int k = 0; k < 3; k++)
+                x = 30;//assegnazione del valore 30 a x
+                y = 12;//assegnazione del valore 12 a y
+                Console.SetCursorPosition(x, y);//impostare la posizione a x e y
+                Console.WriteLine("Cartella 2: ");//stampa dei "Cartella 2: "
+                y++;//incremento di y 
+                for (int i = 0; i < 5; i++)//condizione che verifica se la riga è da trattini (o da numeri)
                 {
-                    for (int j = 0; j < 9; j++)
+                    x = 30;//assegnazione del valore 30 a x
+                    y++;//incremento di y
+                    if (i % 2 == 1)//condizione che verifica se la riga è da trattini (o da numeri)
                     {
-                        if (cart1[j, k] == num)
+                        Console.SetCursorPosition(x, y);//impostare la posizione a x e y
+                        Console.WriteLine("-------------------------");//output della riga di trattini
+                    }
+                    else//istruzioni da eseguire se la condizione non è verificata (riga composta da numeri)
+                    {
+                        Console.SetCursorPosition(x, y);//impostare la posizione a x e y
+                        for (int j = 0; j < 9; j++)//ciclo per scrivere i numeri o gli eventuali spazi all'interno della riga
                         {
-                            if (j == 0)
+                            if (cart2[j, i / 2 + i % 2] != 0)//condizione che verifica se è necessario stampare un numero o lo spazio
                             {
-                                x = 0;
+                                Console.Write($"{cart2[j, i / 2 + i % 2]} ");//stampa del numero (condizione verificata) seguito da uno spazio per distanziarlo dai seguenti numeri/spazi
                             }
-                            else
+                            else//istruzioni da eseguire se la condizione non è verificata (stampa degli spazi)
                             {
-                                x += j * 3 - 1;
+                                if (j == 0)//condizione che verifica se il numero da stampare occupa 1 spazop (decina == 0)
+                                {
+                                    Console.Write("  ");//stampa di uno spazio seguito dallo spazio per distanziarlo dai seguenti numeri/spazi
+                                }
+                                else//istruzioni da eseguire se la condizione non è verificata (decina != 0)
+                                {
+                                    Console.Write("   ");//stampa di due spazi seguiti dallo spazio per distanziarli dai seguenti numeri/spazi
+                                }
                             }
-                            y += k * 2;
-                            car1v++;
-                            Console.SetCursorPosition(x, y);
-                            Console.BackgroundColor = ConsoleColor.Magenta;
-                            Console.Write(num);
-                            Console.BackgroundColor = ConsoleColor.Black;
-                            if (car1v == 15)
+                        }
+                        Console.WriteLine();//a capo
+                    }
+                }
+            }
+            int hcart1()//funzione di evidenziazione dei numeri estratti presenti nella cartella 1 e segnalazione di eventuale vincitore
+            {
+                x = 0;//assegnazione del valore 0 a x
+                y = 14;//assegnazione del valore 14 a y
+                for (int k = 0; k < 3; k++)//ciclo che identifica le righe della cartella
+                {
+                    for (int j = 0; j < 9; j++)//ciclo che identifica ogni numero presente/assente nella riga
+                    {
+                        if (cart1[j, k] == num)//condizione che verifica la presenza del numero estratto
+                        {
+                            if (j == 0)//condizione che verifica se il numero estratto ha decina == 0
                             {
-                                Console.SetCursorPosition(0, 20);
-                                Console.Write("Il giocatore 1 ha fatto tombola");
-                                Console.SetCursorPosition(1, 1);
-                                Environment.Exit(1);
+                                x = 0;//assegnazione del valore 0 a x nel caso la condizione sia verificata (decina == 0)
+                            }
+                            else//istruzioni da eseguire se la condizione non è verificata
+                            {
+                                x += j * 3 - 1;//calcolo della x in base alla decina  del numero
+                            }
+                            y += k * 2;//calcolo della y in base alla riga presa in considerazione
+                            car1v++;//incremento del contatore che segnala la tombola
+                            Console.SetCursorPosition(x, y);//impostare la posizione a x e y
+                            Console.BackgroundColor = ConsoleColor.Magenta;//impostare il colore dello sfondo a magenta
+                            Console.Write(num);//output del numero con sfondo magenta
+                            Console.BackgroundColor = ConsoleColor.Black;//impostare il colore dello sfondo a nero
+                            if (car1v == 15)//condizione che verifica l'eventuale tombola
+                            {
+                                Console.SetCursorPosition(0, 20);//impostare la posizione a 0, 20
+                                Console.Write("Il giocatore 1 ha fatto tombola");//output del messaggio "Il giocatore 1 ha fatto tombola"
+                                Console.SetCursorPosition(1, 1);//impostare la posizione a 1, 1
+                                Environment.Exit(1);//chiusura del programma
                             }
                         }
                     }
                 }
-                return car1v;
+                return car1v;//ritorna il valore aggiornato del contatore per eventuale tombola
             }
-            int hcart2()
+            int hcart2()//funzione di evidenziazione dei numeri estratti presenti nella cartella 1 e segnalazione di eventuale vincitore
             {
-                x = 30;
-                y = 14;
-                for (int k = 0; k < 3; k++)
+                x = 30;//assegnazione del valore 30 a x
+                y = 14;//assegnazione del valore 14 a y
+                for (int k = 0; k < 3; k++)//ciclo che identifica le righe della cartella
                 {
-                    for (int j = 0; j < 9; j++)
+                    for (int j = 0; j < 9; j++)//ciclo che identifica ogni numero presente/assente nella riga
                     {
-                        if (cart2[j, k] == num)
+                        if (cart2[j, k] == num)//condizione che verifica la presenza del numero estratto
                         {
-                            if (j == 0)
+                            if (j == 0)//condizione che verifica se il numero estratto ha decina == 0
                             {
-                                x = 30;
+                                x = 30;//assegnazione del valore 30 a x nel caso la condizione sia verificata (decina == 0)
                             }
-                            else
+                            else//istruzioni da eseguire se la condizione non è verificata
                             {
-                                x += j * 3 - 1;
+                                x += j * 3 - 1;//calcolo della x in base alla decina  del numero
                             }
-                            y += k * 2;
-                            car2v++;
-                            Console.SetCursorPosition(x, y);
-                            Console.BackgroundColor = ConsoleColor.Blue;
-                            Console.Write(num);
-                            Console.BackgroundColor = ConsoleColor.Black;
+                            y += k * 2;//calcolo della y in base alla riga presa in considerazione
+                            car2v++;//incremento del contatore che segnala la tombola
+                            Console.SetCursorPosition(x, y);//impostare la posizione a x e y
+                            Console.BackgroundColor = ConsoleColor.Blue;//impostare il colore dello sfondo a blu
+                            Console.Write(num);//output del numero con sfondo blu
+                            Console.BackgroundColor = ConsoleColor.Black;//impostare il colore dello sfondo a nero
                             if (car2v == 15)
                             {
-                                Console.SetCursorPosition(30, 20);
-                                Console.Write("Il giocatore 2 ha fatto tombola");
-                                Console.SetCursorPosition(1, 1);
-                                Environment.Exit(1);
+                                Console.SetCursorPosition(30, 20);//impostare la posizione a 30, 20
+                                Console.Write("Il giocatore 2 ha fatto tombola");//output del messaggio "Il giocatore 2 ha fatto tombola"
+                                Console.SetCursorPosition(1, 1);//impostare la posizione a 1, 1
+                                Environment.Exit(1);//chiusura del programma
                             }
                         }
                     }
                 }
-                return car2v;
+                return car2v;//ritorna il valore aggiornato del contatore per eventuale tombola
             }
         }
     }
