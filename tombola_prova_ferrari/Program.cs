@@ -48,31 +48,31 @@ namespace tombola_prova_ferrari
                 hcart2();//verifica della presenza di un numero nella cartella 2, di eventuale tombola e cambio del colore dello sfondo
                 Thread.Sleep(100);//attesa tra 2 turni
             }
-            int estrazione()
+            int estrazione()//funzione di estrazione del numero
             {
-                int nume;
-                do
+                int nume;//dichiarazione della variavile locale nume
+                do//ciclo do while per ò'estrazione di un numero non ancora estratto
                 {
-                    nume = ran.Next(1, 91);
-                } while (v[nume - 1] == true);
-                v[nume - 1] = true;
-                return nume;
+                    nume = ran.Next(1, 91);//estrazione di un numero casuale tra 1 e 90
+                } while (v[nume - 1] == true);//verifica che il numero non sia ancora uscito
+                v[nume - 1] = true;//segna il numero estratto come estratto tramite un array do bool (true == estratto)
+                return nume;//ritorna il valore di numer, ovvero il numero estratto
             }
-            int coordx()
+            int coordx()//funzione che restituisce le coordinate x dove scrivere il numero estratto sul tabellone
             {
-                if (num / 10 == 0)
+                if (num / 10 == 0)//condizione che verifica se il numero ha 0 come decina
                 {
-                    x = 2 + (num % 10 * 3);
+                    x = 2 + (num % 10 * 3);//calcolo della x se la condizione è verificata
                 }
-                else
+                else//istruzioni da eseguire se la condizione non è verificata
                 {
-                    if (num % 10 != 0)
+                    if (num % 10 != 0)//condizione che verifica se il numero non ha 0 come unità
                     {
-                        x = 2 + (num % 10 * 3 - 1);
+                        x = 2 + (num % 10 * 3 - 1);//calcolo della x se la condizione è verificata
                     }
-                    else
+                    else//istruzioni da eseguire se la condizione non è verificata
                     {
-                        x = 2 + num / (num / 10) * 3 - 1;
+                        x = 2 + num / (num / 10) * 3 - 1;//calcolo della x se la condizione non è verificata
                     }
                 }
                 return x;
