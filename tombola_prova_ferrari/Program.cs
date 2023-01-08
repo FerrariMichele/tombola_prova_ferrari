@@ -13,17 +13,7 @@ namespace tombola_prova_ferrari
             int[,] cart1 = new int[9, 3];//dichiarazione della matrice cart1, di 9*3 valori, utilizzata per la cartella 1
             int[,] cart2 = new int[9, 3];//dichiarazione della matrice cart2, di 9*3 valori, utilizzata per la cartella 2
             Console.WriteLine("Tabellone: ");//generazione del tabellone
-            for (int i = 0; i < 9; i++)//ciclo di stampa della colonna del tabellone
-            {
-                x = 13;//assegnazione del valore 13 a x
-                for (int j = 0; j < 10; j++)//ciclo di stampa della riga del tabellone
-                {
-                    Console.SetCursorPosition(x, y);//impostare la posizione a x e y
-                    Console.Write("**");//output degli asterischi
-                    x += 3;//incremento della variabile x
-                }
-                y++;//incremento della variabile y
-            }
+            ptab();//stampa del tabellone iniziale in rosso
             ccart1();//generazione dei numeri appartenenti alla cartella 1
             ccart2();//generazione dei numeri appartenenti alla cartella 2
             pcart1();//generazione della cartella 1
@@ -48,6 +38,24 @@ namespace tombola_prova_ferrari
                 hcart2();//verifica della presenza di un numero nella cartella 2, di eventuale tombola e cambio del colore dello sfondo
                 Thread.Sleep(1000);//attesa tra 2 turni
             }
+            void ptab()
+            {
+                int numt = 1;//dichiarazione della variabile numt e assegnazione del valore 1 ad essa
+                Console.ForegroundColor= ConsoleColor.Red;//imposta il colore del testo a rosso
+                for (int i = 0; i < 9; i++)//ciclo di stampa della colonna del tabellone
+                {
+                    x = 13;//assegnazione del valore 13 a x
+                    for (int j = 0; j < 10; j++)//ciclo di stampa della riga del tabellone
+                    {
+                        Console.SetCursorPosition(x, y);//impostare la posizione a x e y
+                        Console.Write(numt);//output degli asterischi
+                        x += 3;//incremento della variabile x
+                        numt++;//incremento della variabile numt
+                    }
+                    y++;//incremento della variabile y
+                }
+                Console.ForegroundColor = ConsoleColor.White;//imposta il colore del testo a rosso
+            }
             int estrazione()//funzione di estrazione del numero
             {
                 int nume;//dichiarazione della variavile locale nume
@@ -62,7 +70,7 @@ namespace tombola_prova_ferrari
             {
                 if (num / 10 == 0)//condizione che verifica se il numero ha 0 come decina
                 {
-                    x = 11 + (num % 10 * 3);//calcolo della x se la condizione è verificata
+                    x = 10 + (num % 10 * 3);//calcolo della x se la condizione è verificata
                 }
                 else//istruzioni da eseguire se la condizione non è verificata
                 {
