@@ -44,8 +44,16 @@ namespace tombola_prova_ferrari
                 Console.ForegroundColor= ConsoleColor.Red;//imposta il colore del testo a rosso
                 for (int i = 0; i < 9; i++)//ciclo di stampa della colonna del tabellone
                 {
-                    x = 13;//assegnazione del valore 13 a x
-                    for (int j = 0; j < 10; j++)//ciclo di stampa della riga del tabellone
+                    x = 12;//assegnazione del valore 13 a x
+                    for (int j = 0; j < 5; j++)//ciclo di stampa della riga del tabellone (1 parte)
+                    {
+                        Console.SetCursorPosition(x, y);//impostare la posizione a x e y
+                        Console.Write(numt);//output degli asterischi
+                        x += 3;//incremento della variabile x
+                        numt++;//incremento della variabile numt
+                    }
+                    x+=2;//aggiunta di 2 qqalla variabile x
+                    for (int j = 0; j < 5; j++)//ciclo di stampa della riga del tabellone (2 parte)
                     {
                         Console.SetCursorPosition(x, y);//impostare la posizione a x e y
                         Console.Write(numt);//output degli asterischi
@@ -70,17 +78,25 @@ namespace tombola_prova_ferrari
             {
                 if (num / 10 == 0)//condizione che verifica se il numero ha 0 come decina
                 {
-                    x = 10 + (num % 10 * 3);//calcolo della x se la condizione è verificata
+                    x = 9 + (num % 10 * 3);//calcolo della x se la condizione è verificata
                 }
                 else//istruzioni da eseguire se la condizione non è verificata
                 {
                     if (num % 10 != 0)//condizione che verifica se il numero non ha 0 come unità
                     {
-                        x = 11 + (num % 10 * 3 - 1);//calcolo della x se la condizione è verificata
+                        if ((num % 10) < 6)//condizione che verifica sle unità sono minori di 6
+                        {
+                            x = 9 + (num % 10 * 3);//calcolo della x se la condizione è verificata
+                        }
+                        else//istruzioni da eseguire se la condizione non è verificata
+                        {
+                            x = 11 + (num % 10 * 3);//calcolo della x se la condizione non è verificata
+                        }
+
                     }
                     else//istruzioni da eseguire se la condizione non è verificata
                     {
-                        x = 11 + num / (num / 10) * 3 - 1;//calcolo della x se la condizione non è verificata
+                        x = 11 + num / (num / 10) * 3;//calcolo della x se la condizione non è verificata
                     }
                 }
                 return x;//ritorna il valore di x
