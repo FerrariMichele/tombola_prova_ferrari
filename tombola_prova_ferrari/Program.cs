@@ -78,13 +78,21 @@ namespace tombola_prova_ferrari
             {
                 if (num / 10 == 0)//condizione che verifica se il numero ha 0 come decina
                 {
-                    x = 9 + (num % 10 * 3);//calcolo della x se la condizione è verificata
+                    if (num < 6)//condizione che verifica se le unità sono minori di 6
+                    {
+                        x = 9 + (num % 10 * 3);//calcolo della x se la condizione è verificata
+                    }
+                    else//istruzioni da eseguire se la condizione non è verificata
+                    {
+                        x = 11 + (num % 10 * 3);//calcolo della x se la condizione non è verificata
+                    }
+                    
                 }
                 else//istruzioni da eseguire se la condizione non è verificata
                 {
                     if (num % 10 != 0)//condizione che verifica se il numero non ha 0 come unità
                     {
-                        if ((num % 10) < 6)//condizione che verifica sle unità sono minori di 6
+                        if ((num % 10) < 6)//condizione che verifica se le unità sono minori di 6
                         {
                             x = 9 + (num % 10 * 3);//calcolo della x se la condizione è verificata
                         }
