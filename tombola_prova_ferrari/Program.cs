@@ -6,12 +6,10 @@ namespace tombola_prova_ferrari
     {
         static void Main(string[] args)
         {
-            int num, x = 0, y = 2;//dichiarazione della variabile num, x, y e assegnazione del valore 2 a y
+            int num, x = 0, y = 2, car1v = 0, car2v = 0;//dichiarazione della variabile num, x, y e assegnazione del valore 2 a y, delle variabili car1v e car2v, per segnalare la tombola
             Random ran = new Random();//dichiarazione della variabile ran
             bool[] v = new bool[90];//dichiarazione dell'array di bool v, di 90 valori
-            int car1v = 0, car2v = 0;//dichiarazione delle variabili car1v e car2v, per segnalare la tombola
-            int[,] cart1 = new int[9, 3];//dichiarazione della matrice cart1, di 9*3 valori, utilizzata per la cartella 1
-            int[,] cart2 = new int[9, 3];//dichiarazione della matrice cart2, di 9*3 valori, utilizzata per la cartella 2
+            int[,] cart1 = new int[9, 3], cart2 = new int[9, 3]; //dichiarazione della matrice cart1, di 9*3 valori, utilizzata per la cartella 1, dichiarazione della matrice cart2, di 9*3 valori, utilizzata per la cartella 2
             Console.WriteLine("Tabellone: ");//generazione del tabellone
             Ptab(x, y);//stampa del tabellone iniziale in rosso
             Ccart1(ran, cart1);//generazione dei numeri appartenenti alla cartella 1
@@ -28,38 +26,63 @@ namespace tombola_prova_ferrari
                     Console.SetCursorPosition(x, y);//impostare la posizione a x e y
                     Console.ForegroundColor = ConsoleColor.Green;//impostare il colore della scritta a verde
                     Console.WriteLine(num);//output del numero in verde
-                    Thread.Sleep(50);//attesa per lampeggiare
+                    Thread.Sleep(500);//attesa per lampeggiare
                     Console.SetCursorPosition(x, y);//impostare la posizione a x e y
                     Console.ForegroundColor = ConsoleColor.White;//impostare il colore della scritta a bianco
                     Console.WriteLine(num);//output del numero in bianco
-                    Thread.Sleep(50);//attesa per lampeggiare
+                    Thread.Sleep(500);//attesa per lampeggiare
                 }
                 car1v = Hcart1(x, y, num, car1v, cart1);//verifica della presenza di un numero nella cartella 1, di eventuale tombola e cambio del colore dello sfondo
                 car2v = Hcart2(x, y, num, car2v, cart2);//verifica della presenza di un numero nella cartella 2, di eventuale tombola e cambio del colore dello sfondo
-                Thread.Sleep(100);//attesa tra 2 turni
+                if (car1v == 15 && car2v != 15)//condizione che verifica l'eventuale tombola
+                {
+                    Console.SetCursorPosition(0, 22);//impostare la posizione a 0, 20
+                    Console.Write("Il giocatore 1 ha fatto tombola");//output del messaggio "Il giocatore 1 ha fatto tombola"
+                    Console.SetCursorPosition(1, 1);//impostare la posizione a 1, 1
+                    Environment.Exit(1);//chiusura del programma
+                }
+                else if (car1v != 15 && car2v == 15)
+                {
+                    Console.SetCursorPosition(30, 22);//impostare la posizione a 30, 20
+                    Console.Write("Il giocatore 2 ha fatto tombola");//output del messaggio "Il giocatore 2 ha fatto tombola"
+                    Console.SetCursorPosition(1, 1);//impostare la posizione a 1, 1
+                    Environment.Exit(1);//chiusura del programma
+                }
+                else if (car1v == 15 && car2v == 15)
+                {
+                    Console.SetCursorPosition(11, 22);//impostare la posizione a 30, 20
+                    Console.Write("Entrambi i giocatori hanno vinto");//output del messaggio "Il giocatore 2 ha fatto tombola"
+                    Console.SetCursorPosition(1, 1);//impostare la posizione a 1, 1
+                    Environment.Exit(1);//chiusura del programma
+                }
+                Thread.Sleep(1000);//attesa tra 2 turni
             }
         }
-        static void Ptab(int x, int y)
+        static void Ptab(int x, int y)//funzione che stampa il tabellone iniziale
         {
             int numt = 1;//dichiarazione della variabile numt e assegnazione del valore 1 ad essa
             Console.ForegroundColor = ConsoleColor.Red;//imposta il colore del testo a rosso
-            for (int i = 0; i < 9; i++)//ciclo di stampa della colonna del tabellone
+            for (int k = 0; k < 3; k++)//ciclo di stampa le righe del tabellone (a gruppi di 3)
             {
-                x = 12;//assegnazione del valore 13 a x
-                for (int j = 0; j < 5; j++)//ciclo di stampa della riga del tabellone (1 parte)
+                for (int i = 0; i < 3; i++)//ciclo di stampa della colonna del tabellone
                 {
-                    Console.SetCursorPosition(x, y);//impostare la posizione a x e y
-                    Console.Write(numt);//output degli asterischi
-                    x += 3;//incremento della variabile x
-                    numt++;//incremento della variabile numt
-                }
-                x += 2;//aggiunta di 2 qqalla variabile x
-                for (int j = 0; j < 5; j++)//ciclo di stampa della riga del tabellone (2 parte)
-                {
-                    Console.SetCursorPosition(x, y);//impostare la posizione a x e y
-                    Console.Write(numt);//output degli asterischi
-                    x += 3;//incremento della variabile x
-                    numt++;//incremento della variabile numt
+                    x = 12;//assegnazione del valore 13 a x
+                    for (int j = 0; j < 5; j++)//ciclo di stampa della riga del tabellone (1 parte)
+                    {
+                        Console.SetCursorPosition(x, y);//impostare la posizione a x e y
+                        Console.Write(numt);//output degli asterischi
+                        x += 3;//incremento della variabile x
+                        numt++;//incremento della variabile numt
+                    }
+                    x += 2;//aggiunta di 2 qqalla variabile x
+                    for (int j = 0; j < 5; j++)//ciclo di stampa della riga del tabellone (2 parte)
+                    {
+                        Console.SetCursorPosition(x, y);//impostare la posizione a x e y
+                        Console.Write(numt);//output degli asterischi
+                        x += 3;//incremento della variabile x
+                        numt++;//incremento della variabile numt
+                    }
+                    y++;//incremento della variabile y
                 }
                 y++;//incremento della variabile y
             }
@@ -112,24 +135,39 @@ namespace tombola_prova_ferrari
         }
         static int Coordy(int y, int num)//funzione che restituisce le coordinate y dove scrivere il numero estratto sul tabellone
         {
-            if (num / 10 == 0)//condizione che verifica se il numero ha 0 come decina
+            if (num % 10 == 0)//condizione che verifica se il numero ha 0 come unità
             {
-                y = 2;//calcolo della y se la condizione è verificata
-            }
-            else//istruzioni da eseguire se la condizione non è verificata
-            {
-                if (num % 10 != 0)//condizione che verifica se il numero non ha 0 come unità
+                if (num / 10 < 4)//condizione che verifica se la decina è minore di 4
+                {
+                    y = 1 + num / 10;//calcolo della y se la condizione è verificata
+                }
+                else if (num / 10 < 7)//condizione che verifica se la decina è minore di 7
                 {
                     y = 2 + num / 10;//calcolo della y se la condizione è verificata
                 }
-                else//istruzioni da eseguire se la condizione non è verificata
+                else//istruzioni da eseguire se le condizioni non sono verificate
                 {
-                    y = 1 + num / 10;//calcolo della y se la condizione non è verificata
+                    y = 3 + num / 10;//calcolo della y se le condizioni non sono verificate
+                }
+            }
+            else//istruzioni da eseguire se la condizione non è verificata
+            {
+                if (num / 10 < 3)//condizione che verifica se la decina è minore di 3
+                {
+                    y = 2 + num / 10;//calcolo della y se la condizione è verificata
+                }
+                else if (num / 10 < 6)//condizione che verifica se la decina è minore di 6
+                {
+                    y = 3 + num / 10;//calcolo della y se la condizione è verificata
+                }
+                else//istruzioni da eseguire se le condizioni non sono verificate
+                {
+                    y = 4 + num / 10;//calcolo della y se le condizioni non sono verificate
                 }
             }
             return y;//ritorna il valore di y
         }
-        static int Ccart1(Random ran, int[,] cart1)//funzione di caricamento della matrice della prima cartella
+        static void Ccart1(Random ran, int[,] cart1)//funzione di caricamento della matrice della prima cartella
         {
             bool[] cartv = new bool[90];//dichiarazione di un array di 90 elementi per verificare l'univocità dei numeri sulla cartella
             int numr;//dichiarazione della variabile intera locale numr
@@ -162,11 +200,9 @@ namespace tombola_prova_ferrari
                     decv[i] = false;//assegnazione di false a decv con in dice il contatore i
                 }
             }
-            return 0;//ritona 0;
         }
-        static int Ccart2(Random ran, int[,] cart2)//funzione di caricamento della matrice della seconda cartella
+        static void Ccart2(Random ran, int[,] cart2)//funzione di caricamento della matrice della seconda cartella
         {
-
             bool[] cartv = new bool[90];//dichiarazione di un array di 90 elementi per verificare l'univocità dei numeri sulla cartella
             int numr;//dichiarazione della variabile intera locale numr
             for (int k = 0; k < 3; k++)//ciclo che identifica le righe della cartella
@@ -198,12 +234,11 @@ namespace tombola_prova_ferrari
                     decv[i] = false;//assegnazione di false a decv con in dice il contatore i
                 }
             }
-            return 0;//ritona 0;
         }
         static void Pcart1(int x, int y, int[,] cart1)//funzione di stampa della prima cartella
         {
             x = 0;//assegnazione del valore 0 a x
-            y = 12;//assegnazione del valore 12 a y
+            y = 14;//assegnazione del valore 12 a y
             Console.SetCursorPosition(x, y);//impostare la posizione a x e y
             Console.WriteLine("Cartella 1: ");//stampa dei "Cartella 1: "
             y++;//incremento di y 
@@ -244,7 +279,7 @@ namespace tombola_prova_ferrari
         static void Pcart2(int x, int y, int[,] cart2)//funzione di stampa della seconda cartella
         {
             x = 30;//assegnazione del valore 30 a x
-            y = 12;//assegnazione del valore 12 a y
+            y = 14;//assegnazione del valore 12 a y
             Console.SetCursorPosition(x, y);//impostare la posizione a x e y
             Console.WriteLine("Cartella 2: ");//stampa dei "Cartella 2: "
             y++;//incremento di y 
@@ -285,7 +320,7 @@ namespace tombola_prova_ferrari
         static int Hcart1(int x, int y, int num, int car1v, int[,] cart1)//funzione di evidenziazione dei numeri estratti presenti nella cartella 1 e segnalazione di eventuale vincitore
         {
             x = 0;//assegnazione del valore 0 a x
-            y = 14;//assegnazione del valore 14 a y
+            y = 16;//assegnazione del valore 14 a y
             for (int k = 0; k < 3; k++)//ciclo che identifica le righe della cartella
             {
                 for (int j = 0; j < 9; j++)//ciclo che identifica ogni numero presente/assente nella riga
@@ -306,13 +341,6 @@ namespace tombola_prova_ferrari
                         Console.BackgroundColor = ConsoleColor.Magenta;//impostare il colore dello sfondo a magenta
                         Console.Write(num);//output del numero con sfondo magenta
                         Console.BackgroundColor = ConsoleColor.Black;//impostare il colore dello sfondo a nero
-                        if (car1v == 15)//condizione che verifica l'eventuale tombola
-                        {
-                            Console.SetCursorPosition(0, 20);//impostare la posizione a 0, 20
-                            Console.Write("Il giocatore 1 ha fatto tombola");//output del messaggio "Il giocatore 1 ha fatto tombola"
-                            Console.SetCursorPosition(1, 1);//impostare la posizione a 1, 1
-                            Environment.Exit(1);//chiusura del programma
-                        }
                     }
                 }
             }
@@ -321,7 +349,7 @@ namespace tombola_prova_ferrari
         static int Hcart2(int x, int y, int num, int car2v, int[,] cart2)//funzione di evidenziazione dei numeri estratti presenti nella cartella 1 e segnalazione di eventuale vincitore
         {
             x = 30;//assegnazione del valore 30 a x
-            y = 14;//assegnazione del valore 14 a y
+            y = 16;//assegnazione del valore 14 a y
             for (int k = 0; k < 3; k++)//ciclo che identifica le righe della cartella
             {
                 for (int j = 0; j < 9; j++)//ciclo che identifica ogni numero presente/assente nella riga
@@ -342,13 +370,6 @@ namespace tombola_prova_ferrari
                         Console.BackgroundColor = ConsoleColor.Blue;//impostare il colore dello sfondo a blu
                         Console.Write(num);//output del numero con sfondo blu
                         Console.BackgroundColor = ConsoleColor.Black;//impostare il colore dello sfondo a nero
-                        if (car2v == 15)
-                        {
-                            Console.SetCursorPosition(30, 20);//impostare la posizione a 30, 20
-                            Console.Write("Il giocatore 2 ha fatto tombola");//output del messaggio "Il giocatore 2 ha fatto tombola"
-                            Console.SetCursorPosition(1, 1);//impostare la posizione a 1, 1
-                            Environment.Exit(1);//chiusura del programma
-                        }
                     }
                 }
             }
