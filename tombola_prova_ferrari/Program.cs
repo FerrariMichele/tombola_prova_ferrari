@@ -12,13 +12,13 @@ namespace tombola_prova_ferrari
             int[,] cart1 = new int[9, 3], cart2 = new int[9, 3]; //dichiarazione della matrice cart1, di 9*3 valori, utilizzata per la cartella 1, dichiarazione della matrice cart2, di 9*3 valori, utilizzata per la cartella 2
             Console.WriteLine("Tabellone: ");//generazione del tabellone
             Ptab(x, y);//stampa del tabellone iniziale in rosso
-            Ccart1(ran, cart1);//generazione dei numeri appartenenti alla cartella 1
-            Ccart2(ran, cart2);//generazione dei numeri appartenenti alla cartella 2
+            Lcart1(ran, cart1);//generazione dei numeri appartenenti alla cartella 1
+            Lcart2(ran, cart2);//generazione dei numeri appartenenti alla cartella 2
             Pcart1(x, y, cart1);//generazione della cartella 1
             Pcart2(x, y, cart2);//generazione della cartella 2
             for (int i = 0; i < 90; i++)//ciclo di estrazione e controllo 
             {
-                num = Estrazione(ran, v);//estrazione del numero
+                num = Est(ran, v);//estrazione del numero
                 x = Coordx(x, num);//calcolo delle x
                 y = Coordy(y, num);//calcolo delle y
                 for (int j = 0; j < 3; j++)//stampa del numero sul tabellone
@@ -34,26 +34,27 @@ namespace tombola_prova_ferrari
                 }
                 car1v = Hcart1(x, y, num, car1v, cart1);//verifica della presenza di un numero nella cartella 1, di eventuale tombola e cambio del colore dello sfondo
                 car2v = Hcart2(x, y, num, car2v, cart2);//verifica della presenza di un numero nella cartella 2, di eventuale tombola e cambio del colore dello sfondo
-                if (car1v == 15 && car2v != 15)//condizione che verifica l'eventuale tombola
+                if (car1v == 15)//condizione che verifica l'eventuale tombola del giocatore 1
                 {
-                    Console.SetCursorPosition(0, 22);//impostare la posizione a 0, 20
-                    Console.Write("Il giocatore 1 ha fatto tombola");//output del messaggio "Il giocatore 1 ha fatto tombola"
+                    if (car2v == 15)//condizione che verifica l'eventuale tombola anche del giocatore 2
+                    {
+                        Console.SetCursorPosition(11, 22);//impostare la posizione a 30, 20
+                        Console.Write("Entrambi i giocatori hanno vinto");//output del messaggio "Il giocatore 2 ha fatto tombola"
+                    }
+                    else//istruzioni da eseguire nel caso il giocatore 1 abbia vinto
+                    {
+                        Console.SetCursorPosition(0, 22);//impostare la posizione a 0, 20
+                        Console.Write("Il giocatore 1 ha fatto tombola");//output del messaggio "Il giocatore 1 ha fatto tombola"
+                    }
                     Console.SetCursorPosition(1, 1);//impostare la posizione a 1, 1
                     Environment.Exit(1);//chiusura del programma
                 }
-                else if (car1v != 15 && car2v == 15)
+                else if (car2v == 15)//condizione che verifica l'eventuale tombola del giocatore 2
                 {
-                    Console.SetCursorPosition(30, 22);//impostare la posizione a 30, 20
-                    Console.Write("Il giocatore 2 ha fatto tombola");//output del messaggio "Il giocatore 2 ha fatto tombola"
-                    Console.SetCursorPosition(1, 1);//impostare la posizione a 1, 1
-                    Environment.Exit(1);//chiusura del programma
-                }
-                else if (car1v == 15 && car2v == 15)
-                {
-                    Console.SetCursorPosition(11, 22);//impostare la posizione a 30, 20
-                    Console.Write("Entrambi i giocatori hanno vinto");//output del messaggio "Il giocatore 2 ha fatto tombola"
-                    Console.SetCursorPosition(1, 1);//impostare la posizione a 1, 1
-                    Environment.Exit(1);//chiusura del programma
+                        Console.SetCursorPosition(30, 22);//impostare la posizione a 30, 20
+                        Console.Write("Il giocatore 2 ha fatto tombola");//output del messaggio "Il giocatore 2 ha fatto tombola"
+                        Console.SetCursorPosition(1, 1);//impostare la posizione a 1, 1
+                        Environment.Exit(1);//chiusura del programma
                 }
                 Thread.Sleep(1000);//attesa tra 2 turni
             }
@@ -88,7 +89,7 @@ namespace tombola_prova_ferrari
             }
             Console.ForegroundColor = ConsoleColor.White;//imposta il colore del testo a rosso
         }
-        static int Estrazione(Random ran, bool[] v)//funzione di estrazione del numero
+        static int Est(Random ran, bool[] v)//funzione di estrazione del numero
         {
             int nume;//dichiarazione della variavile locale nume
             do//ciclo do while per ò'estrazione di un numero non ancora estratto
@@ -167,7 +168,7 @@ namespace tombola_prova_ferrari
             }
             return y;//ritorna il valore di y
         }
-        static void Ccart1(Random ran, int[,] cart1)//funzione di caricamento della matrice della prima cartella
+        static void Lcart1(Random ran, int[,] cart1)//funzione di caricamento della matrice della prima cartella
         {
             bool[] cartv = new bool[90];//dichiarazione di un array di 90 elementi per verificare l'univocità dei numeri sulla cartella
             int numr;//dichiarazione della variabile intera locale numr
@@ -201,7 +202,7 @@ namespace tombola_prova_ferrari
                 }
             }
         }
-        static void Ccart2(Random ran, int[,] cart2)//funzione di caricamento della matrice della seconda cartella
+        static void Lcart2(Random ran, int[,] cart2)//funzione di caricamento della matrice della seconda cartella
         {
             bool[] cartv = new bool[90];//dichiarazione di un array di 90 elementi per verificare l'univocità dei numeri sulla cartella
             int numr;//dichiarazione della variabile intera locale numr
