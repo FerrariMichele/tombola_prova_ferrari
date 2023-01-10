@@ -324,11 +324,7 @@ namespace tombola_prova_ferrari
                 {
                     if (cart1[j, k] == num)//condizione che verifica la presenza del numero estratto
                     {
-                        if (j == 0)//condizione che verifica se il numero estratto ha decina == 0
-                        {
-                            x = 0;//assegnazione del valore 0 a x nel caso la condizione sia verificata (decina == 0)
-                        }
-                        else//istruzioni da eseguire se la condizione non è verificata
+                        if (j != 0)//condizione che verifica se il numero estratto ha decina != 0
                         {
                             x += j * 3 - 1;//calcolo della x in base alla decina  del numero
                         }
