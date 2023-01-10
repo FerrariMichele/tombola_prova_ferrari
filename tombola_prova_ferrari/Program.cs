@@ -68,20 +68,16 @@ namespace tombola_prova_ferrari
                 for (int i = 0; i < 3; i++)//ciclo di stampa della colonna del tabellone
                 {
                     x = 12;//assegnazione del valore 13 a x
-                    for (int j = 0; j < 5; j++)//ciclo di stampa della riga del tabellone (1 parte)
+                    for (int l = 0; l < 2; l++)//ciclo di stampa delle riga del tabellone in 2 parti
                     {
-                        Console.SetCursorPosition(x, y);//impostare la posizione a x e y
-                        Console.Write(numt);//output degli asterischi
-                        x += 3;//incremento della variabile x
-                        numt++;//incremento della variabile numt
-                    }
-                    x += 2;//aggiunta di 2 qqalla variabile x
-                    for (int j = 0; j < 5; j++)//ciclo di stampa della riga del tabellone (2 parte)
-                    {
-                        Console.SetCursorPosition(x, y);//impostare la posizione a x e y
-                        Console.Write(numt);//output degli asterischi
-                        x += 3;//incremento della variabile x
-                        numt++;//incremento della variabile numt
+                        for (int j = 0; j < 5; j++)//ciclo di stampa della riga del tabellone
+                        {
+                            Console.SetCursorPosition(x, y);//impostare la posizione a x e y
+                            Console.Write(numt);//output di numt (numero sul tabellone)
+                            x += 3;//incremento della variabile x
+                            numt++;//incremento della variabile numt
+                        }
+                        x += 2;//aggiunta di 2 qqalla variabile x
                     }
                     y++;//incremento della variabile y
                 }
