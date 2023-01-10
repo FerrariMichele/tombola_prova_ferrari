@@ -179,7 +179,7 @@ namespace tombola_prova_ferrari
                     do//ciclo do while che estrae il numero finchè non rispetta la condizione di univocità della cartella e della decina nella riga
                     {
                         numr = ran.Next(1, 91);//estrazione di un numero casuale tra 1 e 90
-                        if (numr == 90)//verifica che il numero casuale sia 90, in quel caso va applicata una modifica al procedimento
+                        if (numr == 90 && cart1[8,k] != 0)//verifica che il numero casuale sia 90, in quel caso va applicata una modifica al procedimento
                         {
                             j--;//diminuire il contatore in caso di 90, poichè appartenendo ala colonna 8 potrebbe sovrascrivere un numero 8?, avendo come decina 9
                         }
@@ -213,7 +213,7 @@ namespace tombola_prova_ferrari
                     do//ciclo do while che estrae il numero finchè non rispetta la condizione di univocità della cartella e della decina nella riga
                     {
                         numr = ran.Next(1, 91);//estrazione di un numero casuale tra 1 e 90
-                        if (numr == 90)//verifica che il numero casuale sia 90, in quel caso va applicata una modifica al procedimento
+                        if (numr == 90 && cart2[8, k] != 0)//verifica che il numero casuale sia 90, in quel caso va applicata una modifica al procedimento
                         {
                             j--;//diminuire il contatore in caso di 90, poichè appartenendo ala colonna 8 potrebbe sovrascrivere un numero 8?, avendo come decina 9
                         }
