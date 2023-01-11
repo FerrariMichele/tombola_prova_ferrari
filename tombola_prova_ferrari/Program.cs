@@ -29,11 +29,11 @@ namespace tombola_prova_ferrari
                     Console.SetCursorPosition(x, y);                //impostare la posizione a x e y
                     Console.ForegroundColor = ConsoleColor.Green;   //impostare il colore della scritta a verde
                     Console.WriteLine(num);                         //output del numero in verde
-                    Thread.Sleep(tem/2);                              //attesa per lampeggiare
+                    Thread.Sleep(tem/2);                            //attesa per lampeggiare
                     Console.SetCursorPosition(x, y);                //impostare la posizione a x e y
                     Console.ForegroundColor = ConsoleColor.White;   //impostare il colore della scritta a bianco
                     Console.WriteLine(num);                         //output del numero in bianco
-                    Thread.Sleep(tem/2);                              //attesa per lampeggiare
+                    Thread.Sleep(tem/2);                            //attesa per lampeggiare
                 }
                 car1v = Hcart1(x, y, num, car1v, cart1);            //verifica della presenza di un numero nella cartella 1, di eventuale tombola e cambio del colore dello sfondo
                 car2v = Hcart2(x, y, num, car2v, cart2);            //verifica della presenza di un numero nella cartella 2, di eventuale tombola e cambio del colore dello sfondo
@@ -49,7 +49,7 @@ namespace tombola_prova_ferrari
                         Console.SetCursorPosition(0, 22);                   //impostare la posizione a 0, 20
                         Console.Write("Il giocatore 1 ha fatto tombola");   //output del messaggio "Il giocatore 1 ha fatto tombola"
                     }
-                    Console.SetCursorPosition(1, 25);                //impostare la posizione a 1, 1
+                    Console.SetCursorPosition(1, 25);               //impostare la posizione a 1, 1
                     Environment.Exit(1);                            //chiusura del programma
                 }
                 else if (car2v == 15)                               //condizione che verifica l'eventuale tombola del giocatore 2
@@ -59,7 +59,7 @@ namespace tombola_prova_ferrari
                         Console.SetCursorPosition(1, 25);                   //impostare la posizione a 1, 1
                         Environment.Exit(1);                                //chiusura del programma
                 }
-                Thread.Sleep(tem);                                 //attesa tra 2 turni
+                Thread.Sleep(tem);                                  //attesa tra 2 turni
             }
         }
         static int Wtime()                                                  //funzione che chiede l'inserimento del tempo di attesa tra 2 turni
