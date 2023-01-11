@@ -11,6 +11,8 @@ namespace tombola_prova_ferrari
             bool[] v = new bool[90];                                //dichiarazione dell'array di bool v, di 90 valori
             int[,] cart1 = new int[9, 3], cart2 = new int[9, 3];    //dichiarazione della matrice cart1, di 9*3 valori, utilizzata per la cartella 1, dichiarazione della matrice cart2, di 9*3 valori, utilizzata per la cartella 2
             Console.CursorVisible= false;                           //nascondere il cursore
+            int tem = Wtime();                                      //output-input del tempo di attesa
+            Console.SetCursorPosition(0, 0);                        //impostare la posizione a 0, 0 
             Console.WriteLine("Tabellone: ");                       //generazione del tabellone
             Ptab(x, y);                                             //stampa del tabellone iniziale in rosso
             Lcart1(ran, cart1);                                     //generazione dei numeri appartenenti alla cartella 1
@@ -27,11 +29,11 @@ namespace tombola_prova_ferrari
                     Console.SetCursorPosition(x, y);                //impostare la posizione a x e y
                     Console.ForegroundColor = ConsoleColor.Green;   //impostare il colore della scritta a verde
                     Console.WriteLine(num);                         //output del numero in verde
-                    Thread.Sleep(500);                              //attesa per lampeggiare
+                    Thread.Sleep(tem/2);                              //attesa per lampeggiare
                     Console.SetCursorPosition(x, y);                //impostare la posizione a x e y
                     Console.ForegroundColor = ConsoleColor.White;   //impostare il colore della scritta a bianco
                     Console.WriteLine(num);                         //output del numero in bianco
-                    Thread.Sleep(500);                              //attesa per lampeggiare
+                    Thread.Sleep(tem/2);                              //attesa per lampeggiare
                 }
                 car1v = Hcart1(x, y, num, car1v, cart1);            //verifica della presenza di un numero nella cartella 1, di eventuale tombola e cambio del colore dello sfondo
                 car2v = Hcart2(x, y, num, car2v, cart2);            //verifica della presenza di un numero nella cartella 2, di eventuale tombola e cambio del colore dello sfondo
@@ -57,8 +59,21 @@ namespace tombola_prova_ferrari
                         Console.SetCursorPosition(1, 25);                   //impostare la posizione a 1, 1
                         Environment.Exit(1);                                //chiusura del programma
                 }
-                Thread.Sleep(1000);                                 //attesa tra 2 turni
+                Thread.Sleep(tem);                                 //attesa tra 2 turni
             }
+        }
+        static int Wtime()                                                  //funzione che chiede l'inserimento del tempo di attesa tra 2 turni
+        {
+            int t;                              //dichiarazione della variabile locale t
+            do                                  //ciclo do while che verifica se l'input ricevuto è accettabile
+            {
+                Console.WriteLine("Inserire tempo di attesa tra 2 turni (in ms, tra 500 e 2000): ");            //output del messaggio "Inserire tempo di attesa tra 2 turni (in ms, tra 500 e 2000): "
+                t = int.Parse(Console.ReadLine());                                                              //assegnazione alla variabile t del valore ricevuto in input e convertito da string a int
+                Console.SetCursorPosition(0, 0);                                                                //impostare la posizione a 0, 0
+                Console.WriteLine("                                                                     ");     //stampa una riga vuota per cancellare le scritte precendenti
+                Console.WriteLine("     ");                                                                     //stampa una riga vuota per cancellare le scritte precendenti
+            } while (t > 2000 || t < 500);                                                                      //verifica se il numero inserito è minore di 500 o maggiore di 2000    
+            return t;                           //ritorna il valore ottenuto di t
         }
         static void Ptab(int x, int y)                                      //funzione che stampa il tabellone iniziale
         {
